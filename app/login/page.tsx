@@ -28,37 +28,148 @@ const LoginPage = () => {
     setIsPasswordVisible((prevState) => !prevState);
   };
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 h-screen">
+    // <div className="grid grid-cols-3 h-screen">
+    //   <div
+    //     className="relative hidden sm:block bg-cover bg-center col-span-2 hidden md:block"
+    //     style={{ backgroundImage: `url('/loginImage/test.jpg')` }}
+    //   >
+    //     {/* Additional content can go here */}
+    //     <div className="absolute inset-0 bg-sky-950 bg-opacity-90 grid content-start pl-20">
+    //       <div className="flex items-center pt-64">
+    //         <img
+    //           src="/loginImage/CBI-logo.png"
+    //           alt="Logo"
+    //           className="h-12 mr-2"
+    //         />
+    //         <h4 className="scroll-m-20 ml-1 text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl font-semibold tracking-tight">
+    //           Monitoring-Traksi
+    //         </h4>
+    //       </div>
+    //       <div className="pt-24 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl font-bold text-white">
+    //         Web Hasil Pelaporan Kerusakan Unit P2H
+    //       </div>
+    //       <p className="italic text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg text-muted-foreground text-white pt-2">
+    //         Portal Informasi terkait rekap history pelaporan kerusakan Unit P2H
+    //       </p>
+    //     </div>
+    //   </div>
+    //   <div className="col-span-3 md:col-span-1  flex items-center justify-center sm:bg-white lg:bg-white bg-sky-950">
+    //     {/* content */}
+    //     <Card className=" max-w-96">
+    //       <CardHeader>
+    //         <div className="lg:hidden md:hidden sm:block">
+    //           <div className="flex items-center">
+    //             <img
+    //               src="/loginImage/CBI-logo.png"
+    //               alt="Logo"
+    //               className="h-8 mr-2"
+    //             />
+    //             <h4 className="scroll-m-20 text-sky-800 text-md font-semibold tracking-tight">
+    //               Monitoring-Traksi
+    //             </h4>
+    //           </div>
+    //         </div>
+
+    //         <CardTitle>
+    //           <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+    //             Autentikasi Sistem
+    //           </h2>
+    //         </CardTitle>
+    //         <CardDescription>
+    //           <small className="text-sm font-medium leading-none">
+    //             {" "}
+    //             Silakan masuk portal web dengan username dan password dengan
+    //             benar!
+    //           </small>
+    //         </CardDescription>
+    //       </CardHeader>
+    //       <CardContent>
+    //         <form>
+    //           <div className="grid w-full items-center gap-4">
+    //             <div className="flex flex-col space-y-1.5">
+    //               <Label htmlFor="name">Username</Label>
+    //               <Input
+    //                 id="name"
+    //                 placeholder="Masukkan Username"
+    //                 className="focus-visible:ring-0 focus:border-sky-800 focus:border-2"
+    //               />
+    //             </div>
+    //             <div className="flex flex-col space-y-1.5">
+    //               <Label htmlFor="name">Password</Label>
+    //               <div className="relative w-full">
+    //                 <div className="relative w-full">
+    //                   <div className="absolute inset-y-0 right-0 flex items-center px-2">
+    //                     <button
+    //                       type="button"
+    //                       className="bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer"
+    //                       onClick={handleToggle}
+    //                     >
+    //                       {isPasswordVisible ? "hide" : "show"}
+    //                     </button>
+    //                   </div>
+    //                   <Input
+    //                     type={isPasswordVisible ? "text" : "password"}
+    //                     className="focus-visible:ring-0 focus:border-sky-800 focus:border-2"
+    //                     placeholder="Masukkan Password"
+    //                     id="password"
+    //                   />
+    //                 </div>
+    //               </div>
+    //             </div>
+    //             <small className="text-sm font-medium flex justify-end leading-none text-red-700">
+    //               <p className="">Lupa Password?</p>
+    //             </small>
+    //           </div>
+    //         </form>
+    //       </CardContent>
+    //       <CardFooter className="flex justify-end">
+    //         <Button className="bg-green-900 hover:bg-green-700">Login</Button>
+    //       </CardFooter>
+
+    //       <small className="flex justify-center mb-7 text-sm font-medium leading-none">
+    //         @2024. Digital Architect SRS
+    //       </small>
+    //     </Card>
+    //   </div>
+    //   <div className="col-span-1 hidden md:flex items-center justify-center ">
+    //     <h1>asdfjasdkfj</h1>
+    //   </div>
+    //   <div className="col-span-1 hidden lg:flex items-center justify-center ">
+    //     laptop or desktop size
+    //   </div>
+    // </div>
+
+    <div className="grid grid-cols-3 h-screen">
       <div
-        className="relative hidden sm:block bg-cover bg-center"
+        className="relative col-span-2 bg-cover bg-center hidden 2xl:block xl:block "
         style={{ backgroundImage: `url('/loginImage/test.jpg')` }}
       >
-        {/* Additional content can go here */}
-        <div className="absolute inset-0  bg-sky-950 bg-opacity-95 grid content-start pl-20">
-          <div className="flex items-center pt-28">
+        <div className="absolute inset-0 bg-sky-950 bg-opacity-90 grid content-start pl-20">
+          <div className="flex items-center pt-64">
             <img
               src="/loginImage/CBI-logo.png"
               alt="Logo"
-              className="h-10 mr-2"
-            />{" "}
-            {/* Adjust height as needed */}
-            <h4 className="scroll-m-20 text-white text-2xl font-semibold tracking-tight">
+              className="h-12 mr-2"
+            />
+            <h4 className="scroll-m-20 ml-1 text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl font-semibold tracking-tight">
               Monitoring-Traksi
             </h4>
           </div>
-          <div className="pt-16 text-2xl font-bold text-white">
-            {" "}
+          <div className="pt-24 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl font-bold text-white">
             Web Hasil Pelaporan Kerusakan Unit P2H
           </div>
-
-          <p className="italic text-sm text-muted-foreground text-white pt-2">
+          <p className="italic text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg text-muted-foreground text-white pt-2">
             Portal Informasi terkait rekap history pelaporan kerusakan Unit P2H
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-center sm:bg-white lg:bg-white bg-sky-950">
-        {/* content */}
-        <Card className="w-[400px]">
+      <div className="col-span-1 md :hidden lg:hidden">
+        <h2 className="text-2xl font-bold mb-8">Login</h2>
+      </div>
+
+      {/* tablet mode only */}
+      <div className="hidden col-span-1 md:block  lg:block  ">
+        <Card className=" max-w-96">
           <CardHeader>
             <div className="lg:hidden md:hidden sm:block">
               <div className="flex items-center">
@@ -73,10 +184,17 @@ const LoginPage = () => {
               </div>
             </div>
 
-            <CardTitle>Autentikasi Sistem</CardTitle>
+            <CardTitle>
+              <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+                Autentikasi Sistem
+              </h2>
+            </CardTitle>
             <CardDescription>
-              Silakan masuk portal web dengan username dan password dengan
-              benar!
+              <small className="text-sm font-medium leading-none">
+                {" "}
+                Silakan masuk portal web dengan username dan password dengan
+                benar!
+              </small>
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -121,9 +239,10 @@ const LoginPage = () => {
           <CardFooter className="flex justify-end">
             <Button className="bg-green-900 hover:bg-green-700">Login</Button>
           </CardFooter>
-          <p className="flex justify-center mb-5 mt-2 text-sm text-muted-foreground text-black">
+
+          <small className="flex justify-center mb-7 text-sm font-medium leading-none">
             @2024. Digital Architect SRS
-          </p>
+          </small>
         </Card>
       </div>
     </div>
