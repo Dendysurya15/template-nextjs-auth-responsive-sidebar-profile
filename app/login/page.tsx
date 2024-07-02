@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
-
 import Image from "next/image";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -10,10 +12,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Button } from "@/components/ui/button";
-import Form_Login from "@/components/login/form_login";
+import Form_Login from "../../components/login/form_login";
 
 const LoginPage = () => {
+  const router = useRouter();
+  useEffect(() => {
+    document.title = "Login - Monitoring Traksi";
+    // Check if user session exists
+    const sessionUser = sessionStorage.getItem("user");
+    if (sessionUser) {
+      router.push("/dashboard"); // Redirect to dashboard if session exists
+    }
+  });
+
   return (
     <div className="grid grid-cols-3 h-screen">
       <div
@@ -29,9 +40,9 @@ const LoginPage = () => {
                 className="h-12"
               />
             </div>
-            <h4 className="scroll-m-20 ml-3 text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl font-semibold tracking-tight">
+            <p className="scroll-m-20 ml-3 text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl font-semibold tracking-tight">
               Monitoring-Traksi
-            </h4>
+            </p>
           </div>
           <div className="pt-12 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl font-bold text-white">
             Web Hasil Pelaporan Kerusakan Unit P2H
@@ -53,25 +64,21 @@ const LoginPage = () => {
                   className="h-10"
                 />
               </div>
-              <h4 className="scroll-m-20 ml-2 text-sky-800 text-md font-semibold tracking-tight">
+              <p className="scroll-m-20 ml-2 text-sky-800 text-md font-semibold tracking-tight">
                 Monitoring-Traksi
-              </h4>
+              </p>
             </div>
           </div>
 
-          <h2 className="scroll-m-20 text-2xl xl:text-4xl font-semibold tracking-tight first:mt-0">
+          <p className="scroll-m-20 text-2xl xl:text-4xl font-semibold tracking-tight first:mt-0">
             Autentikasi Sistem
-          </h2>
+          </p>
           <small className="text-sm xl:text-md font-medium leading-none">
             {" "}
             Silakan masuk portal web dengan username dan password dengan benar!
           </small>
-          <div className="mt-9">
+          <div className="mt-5">
             <Form_Login />
-          </div>
-
-          <div className="flex justify-end mt-5">
-            <Button className="bg-green-900 hover:bg-green-700">Login</Button>
           </div>
           <small className="mt-14 flex justify-center text-sm xl:text-md font-medium leading-none">
             @2024. Digital Architect SRS
@@ -92,16 +99,16 @@ const LoginPage = () => {
                     className="h-10"
                   />
                 </div>
-                <h4 className="scroll-m-20 ml-2 text-sky-800 text-md font-semibold tracking-tight">
+                <p className="scroll-m-20 ml-2 text-sky-800 text-md font-semibold tracking-tight">
                   Monitoring-Traksi
-                </h4>
+                </p>
               </div>
             </div>
 
             <CardTitle>
-              <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+              <p className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
                 Autentikasi Sistem
-              </h2>
+              </p>
             </CardTitle>
             <CardDescription>
               <small className="text-sm font-medium leading-none">
@@ -116,9 +123,6 @@ const LoginPage = () => {
               <Form_Login />
             </div>
           </CardContent>
-          <CardFooter className="flex justify-end">
-            <Button className="bg-green-900 hover:bg-green-700">Login</Button>
-          </CardFooter>
 
           <small className="flex justify-center mb-7 text-sm font-medium leading-none">
             @2024. Digital Architect SRS
