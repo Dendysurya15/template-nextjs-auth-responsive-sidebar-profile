@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 import { ChevronRightIcon } from "@heroicons/react/16/solid";
 
-const SideBarComponent = () => {
+const SideBarComponent = ({ setActiveLinkProp }) => {
   const [userData, setUserData] = useState(null);
   const [dropdownStates, setDropdownStates] = useState({});
   const [activeLink, setActiveLink] = useState("Dashboard");
@@ -21,68 +21,39 @@ const SideBarComponent = () => {
     setUserData(parsedUserData);
   }, [router]);
 
+  useEffect(() => {
+    setActiveLinkProp(activeLink); // Pass activeLink state to parent component
+  }, [activeLink, setActiveLinkProp]);
+
   const toggleDropdown = (item) => {
     setDropdownStates((prevState) => ({
       ...prevState,
       [item]: !prevState[item],
     }));
   };
+
   const handleRedirect = (url, name) => {
     setActiveLink(name);
     router.push(url);
   };
-  // const createCustomListDropdown = (name, ...subItems) => {
-  //   const hasSubItems = subItems.length > 0;
-  //   return (
-  //     <li key={name} className=" rounded m-2 bg-gray-200 p-2">
-  //       <button
-  //         className="w-full text-left flex justify-between items-center"
-  //         onClick={() => hasSubItems && toggleDropdown(name)}
-  //       >
-  //         {name}
-  //         {hasSubItems && (
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             fill="none"
-  //             viewBox="0 0 24 24"
-  //             stroke-width="3"
-  //             stroke="currentColor"
-  //             className={`w-4 h-4 transform transition-transform ${
-  //               dropdownStates[name] ? "rotate-90" : ""
-  //             }`}
-  //           >
-  //             <path
-  //               stroke-linecap="round"
-  //               stroke-linejoin="round"
-  //               d="m8.25 4.5 7.5 7.5-7.5 7.5"
-  //             />
-  //           </svg>
-  //         )}
-  //       </button>
-  //       {hasSubItems && dropdownStates[name] && (
-  //         <ul className="ml-4 mt-2">
-  //           {subItems.map((subItem) => (
-  //             <li key={subItem}>{subItem}</li>
-  //           ))}
-  //         </ul>
-  //       )}
-  //     </li>
-  //   );
-  // };
 
   const createCustomListDropdown = (name, icon = null, ...subItems) => {
     const hasSubItems = subItems.length > 0;
+    const isActive = activeLink === name;
+
     return (
       <li
         key={name}
         className={`rounded m-2 bg-gray-200 p-2 ${
           !hasSubItems ? "hover:bg-gray-300" : ""
-        } ${activeLink === name ? "bg-gray-400" : ""}`}
+        } ${isActive ? "bg-gray-400" : ""}`}
       >
         {!hasSubItems ? (
           <button
-            className="w-full text-left flex items-center hover:bg-gray-300"
-            onClick={() => redirectTo && handleRedirect(redirectTo, name)}
+            className={`w-full text-left flex items-center ${
+              isActive ? "bg-gray-400" : "hover:bg-gray-300"
+            }`}
+            onClick={() => handleRedirect("/" + name.toLowerCase(), name)}
           >
             <span className="flex items-center">
               {icon && <span className="mr-2">{icon}</span>}
@@ -99,29 +70,23 @@ const SideBarComponent = () => {
                 {icon && <span className="mr-2">{icon}</span>}
                 {name}
               </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                className={`w-4 h-4 ml-auto transform transition-transform ${
+              <ChevronRightIcon
+                className={`ml-auto w-4 h-4 transition-transform transform ${
                   dropdownStates[name] ? "rotate-90" : ""
                 }`}
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
+              />
             </button>
             {hasSubItems && dropdownStates[name] && (
               <ul className="mt-2">
                 {subItems.map((subItem) => (
                   <li
                     key={subItem}
-                    className="pl-8 m-1 p-1 hover:bg-gray-300 rounded"
+                    className={`pl-8 m-1 p-1 hover:bg-gray-300 rounded ${
+                      activeLink === subItem ? "bg-gray-400" : ""
+                    }`}
+                    onClick={() =>
+                      handleRedirect("/" + subItem.toLowerCase(), subItem)
+                    }
                   >
                     {subItem}
                   </li>
@@ -140,7 +105,7 @@ const SideBarComponent = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center m-2 rounded p-2 bg-gray-50 ">
+      <div className="flex items-center justify-center m-2 rounded p-2 bg-gray-50">
         <div className="rounded-full flex flex-col items-center justify-center">
           <Avatar className="w-20 h-20">
             <AvatarFallback>
@@ -180,38 +145,17 @@ const SideBarComponent = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="size-6"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"
             />
           </svg>,
-          "SubItem 1",
-          "SubItem 2"
-        )}
-        {createCustomListDropdown(
-          "Settings",
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"
-            />
-          </svg>,
-          "Profile",
-          "Account",
-          "Privacy"
+          "test"
         )}
       </ul>
     </div>
