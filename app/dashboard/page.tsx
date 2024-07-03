@@ -64,7 +64,7 @@ const Dashboard = () => {
   const initialsName = getInitials(userData.nama_lengkap);
   return (
     <div className="relative ">
-      <div className="h-screen grid grid-cols-5 ">
+      <div className="h-screen grid grid-cols-5 bg-gray-50">
         {/* Sidebar */}
         <aside
           className={`col-span-1 border-r-2 border-gray-200 shadow-2xl  md:hidden xs:hidden sm:hidden rs:hidden ${
