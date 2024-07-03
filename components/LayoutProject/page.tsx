@@ -32,7 +32,6 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    document.title = "Dashboard - Monitoring Traksi";
     const SessionUser = sessionStorage.getItem("user");
     if (!SessionUser) {
       // Redirect to login if user data not found
@@ -62,6 +61,10 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
     setActiveLink(link);
   };
 
+  const handleBreadcrumbClick = (path: string) => {
+    router.push(path.toLowerCase());
+  };
+
   if (!userData) {
     return <div>Loading...</div>;
   }
@@ -70,7 +73,10 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="relative ">
-      <div className="h-screen grid grid-cols-5 bg-gray-50">
+      <div
+        className="h-screen grid grid-cols-5 "
+        style={{ background: "#fefefe" }}
+      >
         {/* Sidebar */}
         <aside
           className={`col-span-1 border-r-2 border-gray-200 shadow-2xl  md:hidden xs:hidden sm:hidden rs:hidden ${
@@ -92,7 +98,7 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
         >
           {/* Page content */}
           <div className="bg-white">
-            <div className="w-full p-2 flex justify-between border-b-2 border-gray-200 shadow-md shadow-gray-200">
+            <div className="w-full p-2 flex justify-between items-center border-b-2 border-gray-200 shadow-md shadow-gray-200">
               <div>
                 <button
                   className="hover:bg-gray-100 text-white font-bold py-2 px-4 rounded"
@@ -102,7 +108,7 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
                 </button>
               </div>
 
-              <div className="flex justify-center text-lg font-semibold text-cyan-950 content-center items-center">
+              <div className="flex justify-center text-lg rs:text-xs font-semibold text-cyan-950 content-center items-center">
                 <div className="h-9 w-9  rounded-full flex items-center justify-center">
                   <img
                     src="/loginImage/traksi_logo.png"
@@ -117,8 +123,10 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
 
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
-                    <MenuButton className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900 rounded hover:bg-gray-100">
-                      <p>{userData.nama_lengkap}</p>
+                    <MenuButton className="inline-flex w-full items-center justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900 rounded hover:bg-gray-100">
+                      <Avatar className="w-10 h-10">
+                        <AvatarFallback>{initialsName}</AvatarFallback>
+                      </Avatar>
                       <ChevronDownIcon
                         className="-mr-1 h-5 w-5 text-gray-400"
                         aria-hidden="true"
@@ -175,7 +183,9 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink
-                    href="/"
+                    onClick={(e) => {
+                      handleBreadcrumbClick(activeLink);
+                    }}
                     className="font-semibold text-blue-950"
                   >
                     {activeLink}
@@ -189,7 +199,7 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
             </Breadcrumb>
           </div>
 
-          {children}
+          <div className="p-5">{children}</div>
         </main>
 
         {/* Sidebar for small screens */}
@@ -197,9 +207,9 @@ const LayoutProject = ({ children }: { children: React.ReactNode }) => {
           <>
             <div
               className="fixed inset-0 z-50 md:w-2/5 sm:w-2/5 xs:w-2/5 rs:w-3/5 h-full"
-              style={{ backgroundColor: "#041723" }}
+              style={{ backgroundColor: "#fefefe" }}
             >
-              <div className="h-full " style={{ backgroundColor: "#041723" }}>
+              <div className="h-full " style={{ background: "#fefefe" }}>
                 <SideBarComponent setActiveLinkProp={setActiveLinkHandler} />
               </div>
             </div>
